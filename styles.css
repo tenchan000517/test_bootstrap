@@ -188,6 +188,7 @@
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 1s ease, transform 1s ease;
+    background-color: #f0f0f0; /* 追加：背景色を白に設定 */
 }
 
 .hero-image {
