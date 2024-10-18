@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIND TO DO - やりたいことを見つけよう</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        /* Feature Section */
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
+        .feature-card .card-body {
+            padding: 2rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: #6c757d;
+        }
+
+        /* Showcase Section */
+        .showcase-img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .showcase-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .img-80 {
+            max-width: 80%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* CTA Section */
+        .cta {
+            background-color: #f8f9fa;
+        }
+
+        .btn-cta {
+            padding: 15px 30px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-cta:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-cta-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .btn-cta-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-cta-wrapper:hover::before {
+            transform: scale(1.1);
+        }
+
+        /* Price Section */
+        .price-card {
+            transition: transform 0.3s;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Team Section */
+        .team-member {
+            margin-bottom: 2rem;
+        }
+
+        .team-member img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .team-member h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* ヒーローセクションのスタイル */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f0f0f0; /* 薄いグレーの背景色 */
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .hero-background {
+            background-color: #f0f0f0; /* 白から薄いグレーに変更 */
+            border-radius: 10px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+            z-index: 0;  /* コンテンツの後ろに配置 */
+            opacity: 0.3;  /* 背景の透明度を調整 */
+            transition: opacity 1s ease;  /* フェードインのアニメーション */
+        }
+
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);  /* 初期位置を少し下げる */
+            transition: opacity 1s ease, transform 1s ease;  /* フェードインと上昇のアニメーション */
+        }
+
+    .hero-image {
+        max-width: 60%;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .hero-content {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        padding: 2rem;
+        max-width: 400px; /* テキストコンテナの幅を狭く設定 */
+
+    }
+
+    .hero-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-main-title {
+        font-size: 2.8rem;  /* フォントサイズを大きく */
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #333;
+    }
+
+    .hero-subtitle {
+        font-size: 1.4rem;  /* フォントサイズを大きく */
+        margin-bottom: 2rem;
+        color: #666;
+    }
+
+    .hero-cta-button, .hero-cta-button-mobile {
+        padding: 10px 30px;
+        font-size: 1.1rem;
+    }
+
+    .fade-in {
+    opacity: 1;
+    transform: translateY(0);  /* 元の位置に戻す */
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+
+    @media (max-width: 767px) {
+        .hero-content-wrapper .row {
+            flex-direction: column;
+        }
+
+        .hero-image {
+            max-width: 100%;
+            /* margin-top: 1rem; */
+            margin-bottom: 0;
+        }
+
+        .hero-content {
+            text-align: center;
+            /* margin-bottom: 1rem; */
+            /* padding: 1.5rem; */
+            box-shadow: none;
+
+        }
+
+        .hero-main-title {
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            margin-bottom: 0;  /* 余分な余白を削除 */
+        }
+
+        .hero-cta-button {
+            /* margin-top: 1rem; */
+            display: block;
+            width: 100%;
+        }
+    }
+
+
+        /* animation */
+        .hero-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff; /* 背景色を白に変更 */
+            z-index: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-title-container {
+            opacity: 0;
+            /* transition: all 0.5s ease; */
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 0;
+        }
+
+        .hero-title span {
+            display: inline-block;
+            transition: all 0.5s ease;
+        }
+
+        .power-button-container {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
+            z-index: 4; /* 電源ボタンを最前面に */
+        }
+
+        .power-button {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #007bff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .power-icon {
+            font-size: 3rem;
+            color: #fff;
+        }
+
+        .loading-bar-container {
+            position: absolute;
+            height: 20px; /* ローディングバーを太く */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .loading-bar {
+            height: 100%;
+            background-color: #007bff;
+            transition: all 0.5s ease;
+            width: 0;
+            border-radius: 7.5px; /* 高さの半分に設定 */
+        }
+
+
+        /* モバイル表示時のタイトルサイズ調整 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @keyframes popOut {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        .pop-out {
+            animation: popOut 0.7s ease-in-out forwards; /* アニメーション時間を少し長くし、イージング関数を追加 */
+        }
+
+        /* 新しいアニメーション */
+        @keyframes slideIn {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .slide-in {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            .loading-bar-container {
+                width: 80%;
+            }
+            .power-button-container {
+                width: 80px;
+                height: 80px;
+            }
+
+            .power-button {
+                width: 80px;
+                height: 80px;
+            }
+
+            .power-icon {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .loading-bar-container {
+                width: 60%;
+            }
+        }
+
+        /* Media Queries */
+        @media (max-width: 767.98px) {
+            .team-member img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヒーローセクション -->
+    <section class="hero">
+
+        <div class="hero-animation">
+            <div class="hero-title-container">
+                <h1 class="hero-title">
+                    <span>F</span><span>I</span><span>N</span><span>D</span>
+                    <span>T</span><span>O</span>
+                    <span>D</span><span>O</span>
+                </h1>
+            </div>
+            <div class="power-button-container">
+                <div class="power-button">
+                    <i class="fas fa-power-off power-icon"></i>
+                </div>
+            </div>
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+        </div>
+        <div class="hero-background"></div>
+
+    <!-- ここにhero-content-wrapperを追加 -->
+    <div class="hero-content-wrapper">
+        <div class="container bg-white rounded-3 py-5">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-md-1 order-2">
+                    <img src="C:\LP\10.png" alt="FIND TO DO アプリイメージ" class="img-fluid hero-image">
+                </div>
+                <div class="col-md-6 order-md-2 order-1">
+                    <div class="hero-content bg-white rounded shadow p-4">
+                        <h1 class="hero-main-title">FIND TO DO</h1>
+                        <p class="hero-subtitle">やりたいことを見つけるアプリ</p>
+                        <a href="#" class="btn btn-primary btn-lg hero-cta-button d-none d-md-inline-block">今すぐ始める</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-md-none">
+                <div class="col-12">
+                    <a href="#" class="btn btn-primary btn-lg hero-cta-button-mobile w-100 mt-3">今すぐ始める</a>
+                </div>
+            </div>
+        </div>
+    </div> <!-- hero-content-wrapperの終了タグ -->
+    </section>
+
+
+    <!-- FEATURESセクション -->
+    <section id="features" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">FIND TO DO の特徴</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-search feature-icon text-primary"></i>
+                            <h3 class="feature-title">FIND</h3>
+                            <p class="feature-description">様々なイベントや有益な情報を探索し、自分に合った機会を見つけましょう。興味のある分野や業界の最新情報をキャッチできます。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-running feature-icon text-success"></i>
+                            <h3 class="feature-title">DO</h3>
+                            <p class="feature-description">見つけたやりたいことを実際に行動に移しましょう。インターンシップやワークショップなど、実践的な経験を通じて成長できます。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-comments feature-icon text-info"></i>
+                            <h3 class="feature-title">CONNECT</h3>
+                            <p class="feature-description">仲間、先輩、企業とつながるコミュニケーション機能を活用しましょう。経験や知識を共有し、キャリアの可能性を広げられます。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOWCASESセクション -->
+    <section id="showcases" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">アプリの特徴</h2>
+            <div class="row align-items-center mb-5">
+                <div class="col-md-6" data-aos="fade-right">
+                    <div class="showcase-container">
+                        <img src="1.png" alt="イベント検索" class="showcase-img rounded shadow img-80">
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <h3>イベント検索</h3>
+                    <p>興味のあるイベントや有益なセミナーを簡単に見つけることができます。多様な機会を探索し、自分の成長につながる体験を見つけましょう。</p>
+                </div>
+            </div>
+            <div class="row align-items-center mb-5">
+                <div class="col-md-6 order-md-2" data-aos="fade-left">
+                    <div class="showcase-container">
+                        <img src="2.png" alt="コミュニケーション" class="showcase-img rounded shadow img-80">
+                    </div>
+                </div>
+                <div class="col-md-6 order-md-1" data-aos="fade-right">
+                    <h3>コミュニケーション</h3>
+                    <p>先輩や企業の方々と直接つながり、貴重な情報交換ができます。リアルタイムチャットで疑問を解決し、キャリアの方向性を見出しましょう。</p>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-md-6" data-aos="fade-right">
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <img src="3.png" alt="自己分析 1" class="showcase-img rounded shadow w-100">
+                        </div>
+                        <div class="col-6 mb-3">
+                            <img src="4.png" alt="自己分析 2" class="showcase-img rounded shadow w-100">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <h3>自己分析</h3>
+                    <p>行動を振り返り、自分の適性を見つけるためのツールを提供します。グラフや分析レポートを通じて、自己理解を深め、キャリアプランニングに活かせます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTAセクション -->
+    <section id="cta" class="section-padding bg-primary text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h2 class="mb-4" data-aos="fade-up">未来への第一歩を踏み出そう</h2>
+                    <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200">FIND TO DO で、あなたの可能性を広げませんか？</p>
+                    <div class="btn-cta-wrapper" data-aos="fade-up" data-aos-delay="400">
+                        <a href="#" class="btn btn-light btn-cta animate-pulse">
+                            今すぐ始める
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 企業向けオプションセクション -->
+    <section id="business-opportunities" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">企業の皆様へ</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-calendar-alt fa-3x mb-3 text-primary"></i>
+                            <h3 class="card-title">イベント掲載</h3>
+                            <p class="card-text">セミナーや説明会など、貴社のイベントを学生に紹介できます。将来の人材との出会いの場を創出しましょう。</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">詳細を見る</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-briefcase fa-3x mb-3 text-primary"></i>
+                            <h3 class="card-title">インターン掲載</h3>
+                            <p class="card-text">実践的な職場体験の機会を提供しませんか？学生が実際の仕事を体験できるインターンシップを掲載できます。</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">詳細を見る</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-handshake fa-3x mb-3 text-primary"></i>
+                            <h3 class="card-title">スポンサー</h3>
+                            <p class="card-text">FIND TO DOのミッションに賛同いただける企業様、私たちと一緒に未来の人材を育てませんか？</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">詳細を見る</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- TEAMセクション -->
+    <section id="team" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">チームメンバー</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-4 col-sm-6" data-aos="fade-up">
+                    <div class="team-member text-center">
+                        <img src="02.png" alt="飯田思遠" class="img-fluid">
+                        <h4>飯田思遠</h4>
+                        <p class="text-muted">Founder</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-member text-center">
+                        <img src="01.png" alt="漆畑智哉" class="img-fluid">
+                        <h4>漆畑智哉</h4>
+                        <p class="text-muted">Engineer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTERセクション -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 FIND TO DO. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // ヒーローセクションのアニメーション
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroAnimation = document.querySelector('.hero-animation');
+            const heroTitleContainer = document.querySelector('.hero-title-container');
+            const heroTitle = document.querySelector('.hero-title');
+            const powerButtonContainer = document.querySelector('.power-button-container');
+            const powerButton = document.querySelector('.power-button');
+            const loadingBarContainer = document.querySelector('.loading-bar-container');
+            const loadingBar = document.querySelector('.loading-bar');
+            const heroContentWrapper = document.querySelector('.hero-content-wrapper');
+
+            // タイトルのフェードイン
+            setTimeout(() => {
+                // heroTitleContainer.style.opacity = '1';
+                heroTitleContainer.classList.add('slide-in');
+            }, 500);
+
+            // タイトルをポップアウトさせて消す
+            setTimeout(() => {
+                heroTitleContainer.classList.remove('slide-in'); // スライドインクラスを削除
+
+                heroTitleContainer.classList.add('pop-out');
+            }, 1500);
+
+            // タイトルが完全に消えた後に電源ボタンを表示
+            setTimeout(() => {
+                heroTitleContainer.style.display = 'none'; // タイトルを完全に非表示にする
+                powerButton.style.opacity = '1';
+            }, 2200); // ポップアウトアニメーションの終了後に設定
+
+            // ローディングバーのアニメーションと電源ボタンの移動
+            setTimeout(() => {
+                loadingBarContainer.style.opacity = '1';
+                loadingBar.style.width = '100%';
+                loadingBar.style.marginLeft = '0';
+                const containerWidth = loadingBarContainer.offsetWidth;
+                const buttonWidth = powerButtonContainer.offsetWidth;
+                powerButtonContainer.style.transform = `translateX(-${(containerWidth - buttonWidth) / 2}px)`;
+            }, 2500);
+
+            // ローディングバーを収納し、電源ボタンを中央に戻す
+            setTimeout(() => {
+                const containerWidth = loadingBarContainer.offsetWidth;
+                loadingBar.style.width = '0';
+                loadingBar.style.marginLeft = `${containerWidth / 2}px`;
+                powerButtonContainer.style.transform = 'translateX(0)';
+            }, 3500);
+
+            // アニメーション要素のフェードアウト
+            setTimeout(() => {
+                heroAnimation.style.opacity = '0';
+            }, 4000);
+
+            if (heroContentWrapper) {
+        console.log("Before:", heroContentWrapper.classList); 
+
+        setTimeout(() => {
+            heroContentWrapper.classList.add('fade-in');  // フェードインアニメーションを適用
+            console.log("After:", heroContentWrapper.classList); 
+        }, 4500);
+    } else {
+        console.error("hero-content-wrapper が見つかりません。");
+    }
+        });
+
+        
+
+    </script>
+</body>
+</html>
