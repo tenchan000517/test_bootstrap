@@ -3,6 +3,10 @@
     padding: 80px 0;
 }
 
+.section-spacing {
+    margin-top: 80px;
+}
+
 /* Feature Section */
 .feature-card {
     border: none;
@@ -188,7 +192,7 @@
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 1s ease, transform 1s ease;
-    background-color: #f0f0f0; /* 追加：背景色を白に設定 */
+    background-color: #f0f0f0;
 }
 
 .hero-image {
@@ -205,8 +209,8 @@
     transition: all 0.3s ease;
     padding: 2rem;
     max-width: 400px;
-    text-align: center; /* 追加：コンテンツを中央揃えに */
-    margin: 0 auto; /* 追加：コンテナ自体を中央に配置 */
+    text-align: center;
+    margin: 0 auto; 
 }
 
 .hero-content:hover {
@@ -231,7 +235,7 @@
 .hero-cta-button-mobile {
     padding: 10px 30px;
     font-size: 1.1rem;
-    display: inline-block; /* 追加：インラインブロック要素に変更 */
+    display: inline-block; 
 }
 
 .fade-in {
@@ -394,6 +398,23 @@
         width: 150px;
         height: 150px;
     }
+
+    .section-spacing {
+        margin-top: 50px;
+    }
+
+    .section-padding {
+        padding: 40px 0;
+    }
+
+    #features,
+    #showcases,
+    #cta,
+    #business-opportunities,
+    #team {
+        margin-top: 30px;
+    }
+
 }
 
 @media (min-width: 769px) {
