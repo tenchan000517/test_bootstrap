@@ -84,6 +84,7 @@ html {
     background-color: #f8f9fa;
 }
 
+
 .btn-cta {
     padding: 15px 30px;
     font-size: 1.25rem;
@@ -93,11 +94,32 @@ html {
     border-radius: 20px;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    color: #007bff;
+    position: relative;
+    overflow: hidden;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.btn-cta::after {
+    /* content: "\f061"; FontAwesome の右矢印のユニコード */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: right 0.3s ease;
 }
 
 .btn-cta:hover {
+    padding-right: 40px;
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-cta:hover::after {
+    right: 10px;
 }
 
 .btn-cta:active {
@@ -108,23 +130,6 @@ html {
 .btn-cta-wrapper {
     position: relative;
     display: inline-block;
-}
-
-.btn-cta-wrapper::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50px;
-    transform: scale(0);
-    transition: transform 0.3s ease;
-}
-
-.btn-cta-wrapper:hover::before {
-    transform: scale(1.1);
 }
 
 /* Price Section */
