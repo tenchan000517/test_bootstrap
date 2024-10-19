@@ -426,6 +426,7 @@ html {
 
     .hero-image {
         max-width: 90%;
+        margin-top: 10px;
         margin-bottom: 10px;
     }
 
