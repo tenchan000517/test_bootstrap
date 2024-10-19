@@ -420,8 +420,8 @@ html {
     }
 
     .hero-image {
-        max-width: 100%;
-        margin-bottom: 0;
+        max-width: 90%;
+        margin-bottom: 10px;
     }
 
     .hero-content {
@@ -437,6 +437,17 @@ html {
     .hero-subtitle {
         font-size: 1rem;
         margin-bottom: 0;
+    }
+
+    .hero-cta-button-mobile {
+        width: 80%; /* ボタンの幅を80%に設定 */
+        max-width: 300px; /* 最大幅を設定 */
+        margin: 0 auto; /* 中央揃え */
+    }
+
+    .hero .row .col-12 {
+        display: flex; /* Flexboxを使用 */
+        justify-content: center; /* 水平方向の中央揃え */
     }
 
     .hero-cta-button {
@@ -483,25 +494,33 @@ html {
         margin-top: 30px;
     }
 
-        #showcases .row.align-items-center {
-            margin-top: 30px;  /* モバイル時の上部余白 */
-        }
-    
-        #showcases .row.align-items-center:first-child {
-            margin-top: 0;  /* 最初の要素には余白を追加しない */
-        }
-    
-        #showcases .col-md-6 {
-            margin-bottom: 20px;  /* テキストとイメージの間に少し余白を追加 */
-        }
-    
-        #showcases .showcase-container {
-            margin-bottom: 20px;  /* イメージの下に少し余白を追加 */
-        }
+    #showcases .row.align-items-center {
+        margin-top: 30px;  /* モバイル時の上部余白 */
+    }
+
+    #showcases .row.align-items-center:first-child {
+        margin-top: 0;  /* 最初の要素には余白を追加しない */
+    }
+
+    #showcases .col-md-6 {
+        margin-bottom: 20px;  /* テキストとイメージの間に少し余白を追加 */
+        padding-left: 20px;  /* 左側の余白 */
+        padding-right: 20px; /* 右側の余白 */
+    }
+
+    #showcases .showcase-container {
+        margin-bottom: 20px;  /* イメージの下に少し余白を追加 */
+    }
     
     /* 自己分析セクションの調整 */
     #showcases .row.align-items-center:last-child .col-md-6:first-child {
         margin-bottom: 20px;  /* 自己分析の画像と説明文の間に余白を追加 */
+    }
+
+    /* 自己分析セクションの画像の余白調整 */
+    #showcases .row .col-6 {
+        padding-left: 10px;  /* 左側の余白を少し狭める */
+        padding-right: 10px; /* 右側の余白を少し狭める */
     }
 
 }
