@@ -211,7 +211,7 @@ html {
     transition: opacity 1s ease;
 }
 
-.hero-content-wrapper {
+/* .hero-content-wrapper {
     position: relative;
     z-index: 5;
     width: 100%;
@@ -255,8 +255,86 @@ html {
     font-size: 1.4rem;
     margin-bottom: 2rem;
     color: #666;
+} */
+
+.hero-content-wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
+.hero-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-image-container {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image {
+    max-height: 80%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.hero-text-container {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+
+.hero-content {
+    text-align: center;
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-main-title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.hero-cta-button, .hero-cta-button-mobile {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.hero-cta-button-mobile {
+    display: none;
+}
+
+/* 
 .hero-cta-button,
 .hero-cta-button-mobile {
     padding: 10px 30px;
@@ -269,7 +347,7 @@ html {
 
 .hero-cta-button::after,
 .hero-cta-button-mobile::after {
-    content: "\f061"; /* FontAwesome の右矢印のユニコード */
+    content: "\f061"; 
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
@@ -287,7 +365,7 @@ html {
 .hero-cta-button:hover,
 .hero-cta-button-mobile:hover {
     padding-right: 40px;
-}
+} */
 
 @keyframes pulse {
     0% {
@@ -415,7 +493,7 @@ html {
 
 /* Media Queries */
 @media (max-width: 768px) {
-    .hero-content-wrapper .container {
+    /* .hero-content-wrapper .container {
         padding-left: 15px;
         padding-right: 15px;
     }
@@ -466,10 +544,41 @@ html {
         justify-content: center;
         padding-left: 15px;
         padding-right: 15px;
+    } */
+
+    .hero-container {
+        flex-direction: column;
     }
+
+    .hero-text-container {
+        order: 1;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .hero-image-container {
+        order: 2;
+        max-height: 50vh;
+    }
+
 
     .hero-cta-button {
         display: none;
+    }
+
+    .hero-cta-button-mobile {
+        display: block;
+        order: 3;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .hero-main-title {
+        font-size: calc(2rem + 2vw);
+    }
+
+    .hero-subtitle {
+        font-size: calc(1rem + 1vw);
     }
 
     .hero-title {
