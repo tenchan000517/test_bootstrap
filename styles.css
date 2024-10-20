@@ -221,8 +221,14 @@ html {
     /* background-color: #f0f0f0; */
 }
 
+.hero-content-wrapper .container {
+    height: 100%; /* コンテナの高さを100%に */
+}
+
 .hero-image {
     max-width: 80%;
+    max-height: 80vh; /* 画像の最大高さをビューポートの80%に制限 */
+
     height: auto;
     margin: 0 auto;
     display: block;
