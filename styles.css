@@ -421,6 +421,11 @@ html {
 
 /* Media Queries */
 @media (max-width: 768px) {
+    .hero {
+        height: auto; /* 自動高さに変更 */
+        min-height: 100vh; /* 最小高さを維持 */
+    }
+    
     .hero-content-wrapper .row {
         flex-direction: column;
     }
