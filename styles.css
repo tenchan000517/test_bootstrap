@@ -429,6 +429,10 @@ html {
         max-height: 50vh;
     }
 
+    .hero-image {
+        max-height: 100%;
+        max-width: 80%; /* モバイルでの画像幅を調整 */
+    }
 
     .hero-cta-button {
         display: none;
