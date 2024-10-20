@@ -422,8 +422,8 @@ html {
 /* Media Queries */
 @media (max-width: 768px) {
     .hero {
-        height: auto;
-        min-height: 100vh;
+        height: auto; /* 自動高さに変更 */
+        min-height: 100vh; /* 最小高さを維持 */
         padding: 20px 0;
     }
 
@@ -431,67 +431,52 @@ html {
         width: 100%;
         padding-left: 15px;
         padding-right: 15px;
-        max-width: 100%;
     }
 
     .hero-content-wrapper .row {
         flex-direction: column;
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .hero .col-md-6 {
-        padding-left: 0;
-        padding-right: 0;
-        width: 100%;
     }
 
     .hero .col-md-6.order-2 {
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
+        padding-top: 0 !important;    /* 上の余白を小さく */
+        padding-bottom: 0 !important; /* 下の余白を小さく */
     }
 
     .hero-image {
-        max-width: 100%;
-        height: auto;
-        margin: 10px auto;
-        display: block;
+        max-width: 90%;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .hero-content {
         text-align: center;
         box-shadow: none;
-        padding: 20px;
-        max-width: 100%;
     }
 
     .hero-main-title {
         font-size: 1.8rem;
         margin-top: 0;
-        margin-bottom: 10px;
     }
 
     .hero-subtitle {
         font-size: 1rem;
-        margin-bottom: 20px;
+        margin-bottom: 0;
     }
 
     .hero-cta-button-mobile {
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-        display: block;
+        width: 80%; /* ボタンの幅を80%に設定 */
+        max-width: 300px; /* 最大幅を設定 */
+        margin: 0 auto; /* 中央揃え */
     }
 
     .hero .row .col-12 {
-        display: flex;
-        justify-content: center;
-        padding-left: 15px;
-        padding-right: 15px;
+        display: flex; /* Flexboxを使用 */
+        justify-content: center; /* 水平方向の中央揃え */
     }
 
     .hero-cta-button {
-        display: none;
+        display: block;
+        width: 100%;
     }
 
     .hero-title {
